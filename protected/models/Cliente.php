@@ -12,6 +12,9 @@
  */
 class Cliente extends CActiveRecord
 {
+	public $dataCreazione;
+	public $idPratica;
+	public $statoPratica;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -34,7 +37,7 @@ class Cliente extends CActiveRecord
 			array('codice_fiscale', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nome, conogme, codice_fiscale, note', 'safe', 'on'=>'search'),
+			array('id, nome, conogme, codice_fiscale, note,dataCreazione,idPratica,statoPratica,pratiche', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +49,7 @@ class Cliente extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'id0' => array(self::BELONGS_TO, 'Pratiche', 'id'),
+			'pratiche' => array(self::HAS_MANY, 'Pratiche', 'id_cliente'),
 		);
 	}
 
@@ -61,6 +64,9 @@ class Cliente extends CActiveRecord
 			'conogme' => 'Cognome',
 			'codice_fiscale' => 'Codice Fiscale',
 			'note' => 'Note',
+			'dataCreazione' => 'Data Creazione',
+			'idPratica' => 'Id Pratica',
+			'statoPratica' => 'Stato Pratica',
 		);
 	}
 
@@ -82,11 +88,16 @@ class Cliente extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->with = array('pratiche');
+
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nome',$this->nome,true);
 		$criteria->compare('conogme',$this->conogme,true);
 		$criteria->compare('codice_fiscale',$this->codice_fiscale,true);
 		$criteria->compare('note',$this->note,true);
+		$criteria->compare('pratiche.data_creazione', $this->dataCreazione,true);
+		$criteria->compare('pratiche.id_pratica', $this->idPratica,true);
+		$criteria->compare('pratiche.stato_pratica', $this->statoPratica,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -102,5 +113,35 @@ class Cliente extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getDataCreazione()
+	{
+		if ($this->pratiche !== null) {
+			return
+				$this->pratiche->data_creazione;
+		} else {
+			return NULL;
+		}
+	}
+
+	public function getIdPratica()
+	{
+		if ($this->pratiche !== null) {
+			return
+				$this->pratiche->id_pratica;
+		} else {
+			return NULL;
+		}
+	}
+
+	public function getStatoPratica()
+	{
+		if ($this->pratiche !== null) {
+			return
+				$this->pratiche->stato_pratica;
+		} else {
+			return NULL;
+		}
 	}
 }

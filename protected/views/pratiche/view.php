@@ -8,10 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Pratiche', 'url'=>array('index')),
-	array('label'=>'Create Pratiche', 'url'=>array('create')),
-	array('label'=>'Update Pratiche', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Pratiche', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'List Pratiche', 'url'=>array('index')),
+	//array('label'=>'Create Pratiche', 'url'=>array('create')),
+	//array('label'=>'Update Pratiche', 'url'=>array('update', 'id'=>$model->id)),
+	//array('label'=>'Delete Pratiche', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Pratiche', 'url'=>array('admin')),
 );
 ?>
@@ -26,6 +26,7 @@ $this->menu=array(
 		'data_creazione',
 		'stato_pratica',
 		'note',
-		'id_cliente',
+		'cliente.nome',
+		'cliente.conogme',
 	),
 )); ?>

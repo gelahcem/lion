@@ -1,16 +1,17 @@
-<?php if(Yii::app()->user->hasFlash('csvImport')): ?>
+<?php if(Yii::app()->user->hasFlash('csvClienteImport')): ?>
     <div class="flash-success">
-        <?php echo Yii::app()->user->getFlash('csvImport'); ?>
+        <?php echo Yii::app()->user->getFlash('csvClienteImport'); ?>
     </div>
 <?php else: ?>
     <div class="form">
         <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'csvImport',
+            'id'=>'csvClienteImport',
             'enableAjaxValidation'=>false,
             'htmlOptions' => array('enctype' => 'multipart/form-data'),
         )); ?>
         <fieldset>
-            <legend>Step 2: Import PRATICHE </legend>
+            <legend>Import CLIENTI:</legend>
+
         Fields with <span class="required">*</span> are required.
 
 

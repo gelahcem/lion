@@ -50,7 +50,8 @@ class Pratiche extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cliente' => array(self::HAS_ONE, 'Cliente', 'id'),
+
+            'cliente' => array(self::BELONGS_TO, 'Cliente', 'id'),
 		);
 	}
 

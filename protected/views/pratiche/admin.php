@@ -11,8 +11,8 @@ $this->menu=array(
 	//array('label'=>'List Pratiche', 'url'=>array('index')),
 	//array('label'=>'Create Pratiche', 'url'=>array('create')),
 	array('label'=>'Export All DB', 'url'=>array('export'),'visible'=>Yii::app()->user->name=="supervisor"),
-	//array('label'=>'File Import (.csv)', 'url'=>array('/importcsv')),
-	array('label'=>'File Import (.csv)', 'url'=>array('csvimport'), 'visible'=>Yii::app()->user->name=="supervisor"),
+	array('label'=>'Step 1: Import Clienti', 'url'=>array('cliente/csvclienteimport'), 'visible'=>Yii::app()->user->name=="supervisor"),
+	array('label'=>'Step 2: Import Pratiche', 'url'=>array('csvimport'), 'visible'=>Yii::app()->user->name=="supervisor"),
 );
 
 Yii::app()->clientScript->registerScript('search', "

@@ -33,8 +33,8 @@ You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&g
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
+<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<div class="search-form" style="display:block">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
@@ -45,13 +45,32 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
+		//'id',
+		/*array(
+			'name' => 'dataCreazione',
+			'value' => '$data->DataCreazione',
+			'header'=> 'Data Creazione',
+			'filter'=> CHtml::activeTextField($model, 'dataCreazione'),
+		),*/
+		/*array(
+			'name' => 'idPratica',
+			//'value' => '($data->IdPratica) ? $data->IdPratica : ""',
+			'header'=> 'ID Pratica',
+			'filter'=> CHtml::activeTextField($model, 'idPratica'),
+		),
+		array(
+			'name' => 'statoPratica',
+			//'value' => '($data->StatoPratica) ? $data->StatoPratica : ""',
+			'header'=> 'Stato Pratica',
+			'filter'=> CHtml::activeTextField($model, 'statoPratica'),
+		),*/
 		'nome',
 		'conogme',
 		'codice_fiscale',
-		'note',
+		//'note',
 		array(
 			'class'=>'CButtonColumn',
+			'template' => '{view}',
 		),
 	),
 )); ?>

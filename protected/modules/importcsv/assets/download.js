@@ -6,7 +6,7 @@ $(document).ready(function() {
     
     $.ajax_upload(button, {
         //action : uploadActionPath,
-        action: '?r=importcsv/default/upload',
+        action: 'importcsv/default/upload',
         name : 'myfile',
         onSubmit : function(file, ext) {
             $("div#importCsvFirstStepResult").text('Loading...');

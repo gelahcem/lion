@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Pratiche', 'url'=>array('create')),
+	//array('label'=>'Create Pratiche', 'url'=>array('create')),
 	array('label'=>'Manage Pratiche', 'url'=>array('admin')),
 );
 ?>

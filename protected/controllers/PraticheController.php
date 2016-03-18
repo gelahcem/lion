@@ -187,6 +187,10 @@ class PraticheController extends Controller
 
 	public function actionCsvImport()
 	{
+        Yii::app()->db->createCommand('set foreign_key_checks=0')->execute();
+        Yii::app()->db->createCommand('TRUNCATE Pratiche')->execute();
+        Yii::app()->db->createCommand('set foreign_key_checks=1')->execute();
+
 		//var_dump($_POST);
 		$model=new CsvUpload;
 

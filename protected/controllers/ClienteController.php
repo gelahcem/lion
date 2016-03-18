@@ -31,13 +31,13 @@ class ClienteController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			array('allow', // allow supervisor user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'users'=>array('supervisor'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','delete', 'csvclienteimport'),
+				'users'=>array('admin', 'supervisor'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -169,5 +169,53 @@ class ClienteController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionCsvClienteImport()
+	{
+
+        Yii::app()->db->createCommand('set foreign_key_checks=0')->execute();
+        Yii::app()->db->createCommand('TRUNCATE Cliente')->execute();
+        Yii::app()->db->createCommand('set foreign_key_checks=1')->execute();
+
+		//var_dump($_POST);
+		$model=new CsvUpload;
+
+		if(isset($_POST['CsvUpload']))
+		{
+			// получаем данные из формы
+			$model->csvFile=CUploadedFile::getInstance($model,'csvFile');
+			if($model->validate()){
+				// данные файла
+				$sourcePath = pathinfo($model->csvFile->getName());
+				// новое имя для файла
+				$csvFile = '_cliente_'.time().'.'. $sourcePath['extension'];
+				//Переменной $file присвоить путь, куда сохранится файл
+				$file = $_SERVER['DOCUMENT_ROOT'].Yii::app()->urlManager->baseUrl . Yii::app()->params['csvPath'] .$csvFile;
+				//Сохраняем файл;
+				$model->csvFile->saveAs($file);
+				// открываем файл считываем csv
+				if (($handle = fopen($file, "r")) !== FALSE) {
+					while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+						$modelMyModel =new Cliente;
+
+						$modelMyModel->id = $data[0];
+						$modelMyModel->nome = $data[1];
+						$modelMyModel->conogme = $data[2];
+						$modelMyModel->codice_fiscale = $data[3];
+						$modelMyModel->note = $data[4];
+
+						$modelMyModel->save();
+					}
+					fclose($handle);
+				}
+				// сообщение о завершении загрузки
+				Yii::app()->user->setFlash('csvClienteImport','The file is loaded, the data is added to CLIENTI');
+			}
+		}
+		// вывод формы
+		$this->render('csvClienteImport',array(
+			'model'=>$model,
+		));
 	}
 }

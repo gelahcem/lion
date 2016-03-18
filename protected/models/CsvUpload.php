@@ -13,7 +13,7 @@ class CsvUpload extends CFormModel
             // проверка типа файла
             array('csvFile', 'file',
                 'types' => 'csv,', 'message'=>'The format must be csv',
-                'maxSize'=>5000, // 2MB
+                'maxSize'=>50000, // 2MB
                 'tooLarge'=>'csv too large', 'allowEmpty' => true),
         );
     }

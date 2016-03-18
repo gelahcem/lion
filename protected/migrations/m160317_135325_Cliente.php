@@ -15,11 +15,6 @@ class m160317_135325_Cliente extends CDbMigration
 
 			ALTER TABLE `Cliente`
 			ADD PRIMARY KEY (`id`);
-			ADD KEY `id` (`id`);
-
-
-
-
         ";
 
 		$this->execute($sql);

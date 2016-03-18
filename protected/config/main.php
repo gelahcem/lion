@@ -30,8 +30,8 @@ return array(
 		),
 
 		'importcsv'=>array(
-			//'path'=>'upload/importCsv/', // path to folder for saving csv file and file with import params
-			'path'=>'?r=importcsv/default/upload', // path to folder for saving csv file and file with import params
+			'path'=>'upload/importCsv/', // path to folder for saving csv file and file with import params
+			//'path'=>'?r=importcsv/default/upload', // path to folder for saving csv file and file with import params
 		),
 
 		'srbac' => array(
