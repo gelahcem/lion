@@ -18,8 +18,6 @@ class m160317_154521_Pratiche extends CDbMigration
 			ADD PRIMARY KEY (`id`);
 
 			ALTER TABLE `Pratiche`
-			ADD CONSTRAINT `Pratiche_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `Cliente` (`id`) ON DELETE CASCADE;
-
         ";
 
 		$this->execute($sql);

@@ -211,14 +211,14 @@ class PraticheController extends Controller
 				if (($handle = fopen($file, "r")) !== FALSE) {
 					while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 						$modelMyModel =new Pratiche();
-
+						
 						$modelMyModel->id = $data[0];
 						$modelMyModel->id_pratica = $data[1];
 						$modelMyModel->data_creazione = $data[2];
 						$modelMyModel->stato_pratica = $data[3];
 						$modelMyModel->note = $data[4];
 						$modelMyModel->id_cliente = $data[5];
-
+						
 						$modelMyModel->save();
 					}
 					fclose($handle);
